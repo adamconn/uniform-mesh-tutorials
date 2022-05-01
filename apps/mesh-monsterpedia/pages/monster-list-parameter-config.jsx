@@ -4,7 +4,7 @@ export default function MonsterListParameterConfig() {
   return (
     <div>
       <div>
-        [!!! FILTER INPUT FIELD COMPONENTS !!!]
+        [!!! FILTER INPUT FIELD COMPONENT !!!]
       </div>
     </div>
   );
