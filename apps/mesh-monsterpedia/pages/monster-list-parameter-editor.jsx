@@ -6,7 +6,6 @@ import {
 import { LoadingIndicator } from "@uniformdev/design-system";
 import { createClient } from "monsterpedia";
 
-
 // const data = [
 //   {
 //     id: "some-entry",
@@ -60,8 +59,8 @@ export default function MonsterListParameterEditor() {
       setMonsters(monsters);
       const results = getSearchResults(searchText, monsters);
       setResults(results);
-      if (value) {
-        const selected = results.filter((result) => result.id == value);
+      if (value?.index) {
+        const selected = results.filter((result) => result.id == value.index);
         setSelectedItems(selected);
       }
       setLoading(false);
@@ -87,7 +86,7 @@ export default function MonsterListParameterEditor() {
 
   const onSelect = (selected) => {
     if (selected && selected.length == 1) {
-      setValue(selected[0].id);
+      setValue({ index: selected[0].id });
     } else {
       setValue("");
     }

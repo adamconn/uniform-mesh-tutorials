@@ -29,10 +29,10 @@ export default function Settings() {
         return;
       }
       const monsters = await client.getMonsters();
-      if (monsters?.count >= 0) {
+      if (monsters?.length >= 0) {
         setMessage({
           type: "success",
-          text: `This is a valid endpoint (${monsters.count} monsters returned)`,
+          text: `This is a valid endpoint (${monsters.length} monsters returned)`,
         });
       } else {
         setMessage({
