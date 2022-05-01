@@ -18,7 +18,6 @@
     "@uniformdev/canvas": "^16.0.0",
     "@uniformdev/canvas-react": "^16.0.0",
     "@uniformdev/cli": "^16.0.0",
-    "canvas-monsterpedia": "*",
     "chart.js": "^3.7.1",
     "color": "^4.2.3",
     "next": "12.1.5",

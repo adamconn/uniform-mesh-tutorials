@@ -41,15 +41,10 @@ compositions:
       slots:
         body:
           - type: dragonDetails
-            parameters:
-              monster:
-                type: monster-list
-                value:
-                  index: adult-gold-dragon
       parameters:
         pageName:
           type: text
           value: Welcome to the site!
     created: '2022-04-25T12:32:15.36656+00:00'
-    modified: '2022-05-01T14:34:51.773883+00:00'
+    modified: '2022-05-01T14:37:33.775271+00:00'
     pattern: false
