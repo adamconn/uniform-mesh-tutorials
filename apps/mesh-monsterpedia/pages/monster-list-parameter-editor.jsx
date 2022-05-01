@@ -59,8 +59,8 @@ export default function MonsterListParameterEditor() {
           for (let i = 0; i < selected.length; i++) {
             const monster = await client.getMonster(selected[i].id);
             if (monster) {
-              const { alignment, size, index, url } = monster;
-              selected[i].metadata = { alignment, size, index, url };
+              const { alignment, index, size, url } = monster;
+              selected[i].metadata = { alignment, index, size, url };
             }
           }
           setSelectedItems(selected);
