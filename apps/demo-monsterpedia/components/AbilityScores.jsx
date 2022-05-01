@@ -13,7 +13,7 @@ import Color from "color";
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip);
 
 export default function AbilityScores({
-  scores = {},
+  scores,
   label = "Points",
   height = "250px",
   width = "250px",
@@ -21,7 +21,7 @@ export default function AbilityScores({
 }) {
   const data = getRadarChartData(scores, label, color);
   if (!data) {
-    return null;
+    return <div />;
   }
   return (
     <div>

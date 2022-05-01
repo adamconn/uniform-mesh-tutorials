@@ -34,8 +34,11 @@ function Template(args) {
   const { index, host } = args;
   const [scores, setScores] = useState();
   useEffect(() => {
+    if (!index || index.trim().length == 0) {
+      setScores();
+      return;
+    }
     async function loadMonster() {
-      const { index } = args;
       const response = await fetch(`${host}/api/monsters/${index}`);
       const monster = await response.json();
       const newScores = getScoresFromMonster(monster);
@@ -43,7 +46,6 @@ function Template(args) {
     }
     loadMonster();
   }, [index]);
-  if (!scores) return <div />;
   return <AbilityScores {...args} scores={scores} />;
 }
 

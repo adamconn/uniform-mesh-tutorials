@@ -3,12 +3,15 @@ import AbilityScores from "./AbilityScores";
 import MonsterProperties from "./MonsterProperties";
 
 export default function MonsterDetails({
-  monster = {},
+  monster,
   height = "250px",
   width = "250px",
   color,
   label,
 }) {
+  if (!monster) {
+    return <div />;
+  }
   const { strength, dexterity, constitution, intelligence, wisdom, charisma } =
     monster;
   const scores = {

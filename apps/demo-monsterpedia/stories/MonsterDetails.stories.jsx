@@ -30,14 +30,16 @@ function Template(args) {
   const { index, host } = args;
   const [monster, setMonster] = useState();
   useEffect(() => {
+    if (!index || index.trim().length == 0) {
+      setMonster();
+      return;
+    }
     async function loadMonster() {
-      const { index } = args;
       const response = await fetch(`${host}/api/monsters/${index}`);
       const json = await response.json();
       setMonster(json);
     }
     loadMonster();
   }, [index]);
-  if (!monster) return <div />;
   return <MonsterDetails {...args} monster={monster} />;
 }

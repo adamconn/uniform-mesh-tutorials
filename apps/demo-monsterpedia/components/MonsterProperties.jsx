@@ -2,6 +2,9 @@ import React from "react";
 
 export default function MonsterProperties({ monster }) {
   const data = getData(monster);
+  if (!data) {
+    return <div />;
+  };
   return (
     <div className="w-80">
       <table>
@@ -19,6 +22,7 @@ export default function MonsterProperties({ monster }) {
 }
 
 function getData(monster) {
+  if (!monster) return;
   const abilities = getNamesAsString(monster.special_abilities);
   const actions = getNamesAsString(monster.actions);
   const legendaryActions = getNamesAsString(monster.legendary_actions);
