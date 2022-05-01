@@ -11,8 +11,8 @@ components:
     slots: []
     titleParameter: ''
     canBeComposition: false
-    created: '2022-04-25T12:32:14.60504+00:00'
-    updated: '2022-05-01T13:02:10.785068+00:00'
+    created: '2022-05-01T17:29:29.073045+00:00'
+    updated: '2022-05-01T17:29:29.073045+00:00'
   - id: landingPage
     name: Landing Page
     icon: screen
@@ -30,8 +30,8 @@ components:
         inheritAllowedComponents: false
     titleParameter: ''
     canBeComposition: true
-    created: '2022-04-25T12:32:14.79649+00:00'
-    updated: '2022-04-25T12:32:14.79649+00:00'
+    created: '2022-05-01T17:29:28.835337+00:00'
+    updated: '2022-05-01T17:29:28.835337+00:00'
 compositions:
   - composition:
       _id: 13b8cc7d-614a-4b28-9e9d-933b483277d0
@@ -45,11 +45,11 @@ compositions:
               monster:
                 type: monster-list
                 value:
-                  index: adult-gold-dragon
+                  index: ancient-gold-dragon
       parameters:
         pageName:
           type: text
           value: Welcome to the site!
-    created: '2022-04-25T12:32:15.36656+00:00'
-    modified: '2022-05-01T14:34:51.773883+00:00'
+    created: '2022-05-01T20:21:12.225328+00:00'
+    modified: '2022-05-01T20:31:02.11824+00:00'
     pattern: false
