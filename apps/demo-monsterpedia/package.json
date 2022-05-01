@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "download:manifest": "uniform context manifest download --output ./lib/contextManifest.json",
     "canvas:pull": "uniform canvas component pull ./canvas/demo-monsterpedia.yaml && uniform canvas composition pull ./canvas/demo-monsterpedia.yaml",
     "canvas:push": "uniform canvas component push ./canvas/demo-monsterpedia.yaml && uniform canvas composition push ./canvas/demo-monsterpedia.yaml",
     "verify-env": "node lib/verify-env.js",

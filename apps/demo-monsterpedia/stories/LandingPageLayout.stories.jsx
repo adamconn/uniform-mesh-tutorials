@@ -7,13 +7,6 @@ export default {
   title: "Basic Integration/Landing Page Layout",
   component: LandingPageLayout,
   argTypes: {
-    // index: {
-    //   name: "monster",
-    //   type: { required: true },
-    // },
-    // host: {
-    //   type: { required: true },
-    // },
   },
   parameters: { controls: { sort: "requiredFirst" } },
 };

@@ -26,15 +26,21 @@ MonsterLookup.args = {
 function Template(args) {
   const { index, host } = args;
   const [monster, setMonster] = useState();
-  useEffect(() => {
-    async function loadMonster() {
-      const { index } = args;
-      const response = await fetch(`${host}/api/monsters/${index}`);
-      const json = await response.json();
-      setMonster(json);
+  const loadMonster = async () => {
+    if (!index || index.trim().length == 0) {
+      setMonster();
+      return;
     }
-    loadMonster();
+    const response = await fetch(`${host}/api/monsters/${index}`);
+    const json = await response.json();
+    setMonster(json);
+  };  
+  useEffect(() => {
+    loadMonster(index, setMonster);
+  }, []);
+  useEffect(() => {
+    loadMonster(index, setMonster);
   }, [index]);
-  if (!monster) return <div />;
   return <MonsterProperties {...args} monster={monster} />;
 }
+
