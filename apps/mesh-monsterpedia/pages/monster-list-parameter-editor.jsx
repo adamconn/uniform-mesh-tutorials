@@ -36,6 +36,17 @@ export default function MonsterListParameterEditor() {
   const [selectedItems, setSelectedItems] = useState([]);
   const [searchText, setSearchText] = useState();
 
+  async function addMetadata(selected) {
+    for (let i = 0; i < selected.length; i++) {
+      const monster = await client.getMonster(selected[i].id);
+      if (monster) {
+        const { alignment, index, size, url } = monster;
+        selected[i].metadata = { alignment, index, size, url };
+      }
+    }
+    setSelectedItems(selected);
+  }
+
   useEffect(() => {
     async function getMonsters() {
       const monsters = await client.getMonsters(filter);
@@ -44,7 +55,9 @@ export default function MonsterListParameterEditor() {
       setResults(results);
       if (value?.index) {
         const selected = results.filter((result) => result.id == value.index);
-        setSelectedItems(selected);
+        addMetadata(selected).then(() => {
+          setSelectedItems(selected);
+        })
       }
       setLoading(false);
     }
@@ -55,17 +68,7 @@ export default function MonsterListParameterEditor() {
     if (value?.index) {
       const selected = results.filter((result) => result.id == value.index);
       if (selected && selected.length > 0) {
-        async function addMetadata() {
-          for (let i = 0; i < selected.length; i++) {
-            const monster = await client.getMonster(selected[i].id);
-            if (monster) {
-              const { alignment, index, size, url } = monster;
-              selected[i].metadata = { alignment, index, size, url };
-            }
-          }
-          setSelectedItems(selected);
-        }
-        addMetadata();
+        addMetadata(selected);
         return;
       }
     }
