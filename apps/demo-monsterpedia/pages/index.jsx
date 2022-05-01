@@ -1,9 +1,17 @@
 import {
   CanvasClient,
+  enhance,
+  EnhancerBuilder,
   CANVAS_DRAFT_STATE,
   CANVAS_PUBLISHED_STATE,
 } from "@uniformdev/canvas";
 import { Composition } from "@uniformdev/canvas-react";
+import {
+  CANVAS_MONSTER_LIST_PARAMETER_TYPES,
+  createMonsterEnhancer,
+} from "canvas-monsterpedia";
+import { createClient } from "monsterpedia";
+
 import { useLivePreviewNextStaticProps } from "../hooks/useLivePreviewNextStaticProps";
 import resolveRenderer from "../lib/resolveRenderer";
 import LandingPageLayout from "../components/LandingPageLayout";
@@ -11,6 +19,8 @@ import LandingPageLayout from "../components/LandingPageLayout";
 export async function getStaticProps({ preview }) {
   const slug = "/";
   const composition = await getComposition(slug, preview);
+  const enhancers = getEnhancers();
+  await enhance({ composition, enhancers });
   return {
     props: { composition },
   };
@@ -39,4 +49,13 @@ async function getComposition(slug, preview) {
     state: preview ? CANVAS_DRAFT_STATE : CANVAS_PUBLISHED_STATE,
   });
   return composition;
+}
+
+function getEnhancers() {
+  const client = createClient();
+  const monsterEnhancer = createMonsterEnhancer(client);
+  return new EnhancerBuilder().parameterType(
+    CANVAS_MONSTER_LIST_PARAMETER_TYPES,
+    monsterEnhancer
+  );
 }

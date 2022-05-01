@@ -6,25 +6,9 @@ import {
 import { LoadingIndicator } from "@uniformdev/design-system";
 import { createClient } from "monsterpedia";
 
-// const data = [
-//   {
-//     id: "some-entry",
-//     title: "Some Entry",
-//     popoverData: { something: "hello, world" },
-//     createdDate: "2000-01-01T00:00:00",
-//     metadata: { Updated: "1 month ago" },
-//   },
-//   { id: "some-other-entry", title: "Some Other Entry" },
-//   {
-//     id: "and-another-one",
-//     title: "And Another One",
-//     editLink: "https://uniform.dev",
-//   },
-// ];
-
 function toResult(monster) {
-  const { index, name, url } = monster;
-  return { id: index, title: name, metadata: { index, url } };
+  const { index, name } = monster;
+  return { id: index, title: name };
 }
 
 function getSearchResults(filter, monsters) {
@@ -41,12 +25,12 @@ function getSearchResults(filter, monsters) {
   return filtered.map(toResult);
 }
 
+const client = createClient();
+
 export default function MonsterListParameterEditor() {
   const { value, setValue, metadata } = useUniformMeshLocation();
   const filter = metadata?.parameterDefinition?.typeConfig?.filter;
-
   const [loading, setLoading] = useState(true);
-
   const [monsters, setMonsters] = useState([]);
   const [results, setResults] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
@@ -54,7 +38,6 @@ export default function MonsterListParameterEditor() {
 
   useEffect(() => {
     async function getMonsters() {
-      const client = createClient();
       const monsters = await client.getMonsters(filter);
       setMonsters(monsters);
       const results = getSearchResults(searchText, monsters);
@@ -69,10 +52,22 @@ export default function MonsterListParameterEditor() {
   }, []);
 
   useEffect(() => {
-    if (value) {
-      const selected = results.filter((result) => result.id == value);
-      setSelectedItems(selected);
-      return;
+    if (value?.index) {
+      const selected = results.filter((result) => result.id == value.index);
+      if (selected && selected.length > 0) {
+        async function addMetadata() {
+          for (let i = 0; i < selected.length; i++) {
+            const monster = await client.getMonster(selected[i].id);
+            if (monster) {
+              const { alignment, size, index, url } = monster;
+              selected[i].metadata = { alignment, size, index, url };
+            }
+          }
+          setSelectedItems(selected);
+        }
+        addMetadata();
+        return;
+      }
     }
     setSelectedItems();
   }, [value]);
